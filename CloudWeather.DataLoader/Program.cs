@@ -36,10 +36,10 @@ namespace CloudWeather.DataLoader
             };
 
             var tempHttpClient = new HttpClient();
-            tempHttpClient.BaseAddress = new Uri($"http://{tempServiceHost}:{tempServicePort}");
+            tempHttpClient.BaseAddress = new Uri($"http://{tempServiceHost}:{tempServicePort}/temperature/");
 
             var precipHttpClient = new HttpClient();
-            precipHttpClient.BaseAddress = new Uri($"http://{precipServiceHost}:{precipServicePort}");
+            precipHttpClient.BaseAddress = new Uri($"http://{precipServiceHost}:{precipServicePort}/precipitation/");
 
             foreach (var zip in zipCodes)
             {
