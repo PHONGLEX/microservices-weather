@@ -13,6 +13,11 @@ namespace CloudWeather.Precipitation.Services
             _precipitationRepository = precipitationRepository;
         }
 
+        public async Task CreateObservation(DataAccess.Precipitation precip)
+        {
+            await _precipitationRepository.CreateObservation(precip);
+        }
+
         public async Task<System.Collections.Generic.List<CloudWeather.Precipitation.DataAccess.Precipitation>> GetPrecipitationByZipCode(string zip, DateTime dt)
         {
             return await _precipitationRepository.GetPrecipitationByZipCode(zip, dt);

@@ -7,5 +7,7 @@ namespace CloudWeather.Precipitation.Services
     public interface IPrecipitationServices
     {
         Task<List<CloudWeather.Precipitation.DataAccess.Precipitation>> GetPrecipitationByZipCode(string zip, DateTime dt);
+
+        Task CreateObservation(DataAccess.Precipitation precip);
     }
 }

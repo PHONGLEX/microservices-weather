@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CloudWeather.Report.Business;
+using CloudWeather.Report.Config;
 using CloudWeather.Report.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +30,11 @@ namespace CloudWeather.Report
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
+            services.AddTransient<IWeatherReportAggregator, WeatherReportAggregator>();
+            services.AddOptions();
+            services.Configure<WeatherDataConfig>(Configuration.GetSection("WeatherDataConfig"));
+
             services.AddDbContext<WeatherReportDbContext>(opts =>
             {
                 opts.EnableSensitiveDataLogging();

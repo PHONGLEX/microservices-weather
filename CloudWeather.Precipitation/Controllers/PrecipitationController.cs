@@ -22,8 +22,8 @@ namespace CloudWeather.Precipitation.Controllers
             _services = services;
         }
 
-        [HttpGet("{zip}")]
-        public ActionResult<List<CloudWeather.Precipitation.DataAccess.Precipitation>> Get(string zip, [FromQuery] int? days)
+        [HttpGet("observation/{zip}")]
+        public async Task<ActionResult<List<CloudWeather.Precipitation.DataAccess.Precipitation>>> Get(string zip, [FromQuery] int? days)
         {
             if (days == null || days < 0 || days > 30)
             {
@@ -32,9 +32,16 @@ namespace CloudWeather.Precipitation.Controllers
 
             var startDate = DateTime.UtcNow - TimeSpan.FromDays(days.Value);
 
-            var results = _services.GetPrecipitationByZipCode(zip, startDate);
+            var results = await _services.GetPrecipitationByZipCode(zip, startDate);
 
             return Ok(results);
+        }
+
+        [HttpPost("observation")]
+        public async Task Post(CloudWeather.Precipitation.DataAccess.Precipitation precip)
+        {
+            precip.CreatedOn = precip.CreatedOn.ToUniversalTime();
+            await _services.CreateObservation(precip);
         }
     }
 }

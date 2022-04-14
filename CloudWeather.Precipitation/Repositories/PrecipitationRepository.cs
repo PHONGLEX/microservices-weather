@@ -16,6 +16,12 @@ namespace CloudWeather.Precipitation.Repositories
             _context = context;
         }
 
+        public async Task CreateObservation(DataAccess.Precipitation precip)
+        {
+            await _context.AddAsync(precip);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<CloudWeather.Precipitation.DataAccess.Precipitation>> GetPrecipitationByZipCode(string zip, DateTime dt)
         {
             return await _context.Precipitation.Where(precip => precip.ZipCode == zip && precip.CreatedOn > dt).ToListAsync();
