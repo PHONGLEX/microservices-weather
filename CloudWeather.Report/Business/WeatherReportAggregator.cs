@@ -97,7 +97,7 @@ namespace CloudWeather.Report.Business
             var tempServiceProtocol = _weatherDataConfig.TempDataProtocol;
             var tempServiceHost = _weatherDataConfig.TempDataHost;
             var tempServicePort = _weatherDataConfig.TempDataPort;
-            return $"{tempServiceProtocol}://{tempServiceHost}:{tempServicePort}/observation/{zip}?days={days}";
+            return $"{tempServiceProtocol}://{tempServiceHost}:{tempServicePort}/temperature/observation/{zip}?days={days}";
         }
 
         private string BuildPrecipitationServiceEndpoint(string zip, int days)
@@ -105,7 +105,7 @@ namespace CloudWeather.Report.Business
             var precipServiceProtocol = _weatherDataConfig.PrecipDataProtocol;
             var precipServiceHost = _weatherDataConfig.PrecipDataHost;
             var precipServicePort = _weatherDataConfig.PrecipDataPort;
-            return $"{precipServiceProtocol}://{precipServiceHost}:{precipServicePort}/observation/{zip}?days={days}";
+            return $"{precipServiceProtocol}://{precipServiceHost}:{precipServicePort}/precipitation/observation/{zip}?days={days}";
         }
     }
 }
